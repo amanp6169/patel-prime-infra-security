@@ -1,0 +1,597 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Patel Prime Infra &amp; Security</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #eef3f8;
+    --surface: #ffffff;
+    --surface-soft: #f8fbff;
+    --ink: #132033;
+    --ink-soft: #465a76;
+    --brand: #0e2a57;
+    --brand-2: #0bb3f3;
+    --accent: #18c77a;
+    --line: #d7e1ec;
+    --shadow: 0 12px 32px rgba(11, 34, 68, 0.14);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Barlow", "Trebuchet MS", sans-serif;
+    line-height: 1.6;
+    color: var(--ink);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(11, 179, 243, 0.12), transparent 35%),
+        radial-gradient(circle at 85% 10%, rgba(24, 199, 122, 0.12), transparent 30%),
+        var(--bg);
+}
+
+header {
+    background: rgba(14, 42, 87, 0.93);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    padding: 14px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-placeholder {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    background: linear-gradient(145deg, var(--brand-2), #56d6ff);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(11, 179, 243, 0.35);
+}
+
+.company-name {
+    font-family: "Sora", sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: 0.25s ease;
+}
+
+nav a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #9de8ff;
+}
+
+.hero {
+    min-height: 90vh;
+    padding: 110px 20px 70px;
+    background:
+        linear-gradient(120deg, rgba(7, 23, 50, 0.84), rgba(9, 43, 75, 0.78)),
+        url('https://images.unsplash.com/photo-1581091215367-59ab6b1f57c1?auto=format&fit=crop&w=1920&q=80') center/cover;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: min(600px, 78vw);
+    height: min(600px, 78vw);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 50%;
+    right: -170px;
+    bottom: -260px;
+}
+
+.hero > div {
+    max-width: 900px;
+    animation: riseIn 0.8s ease both;
+}
+
+.hero h2 {
+    font-family: "Sora", sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.15;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    font-size: clamp(1.02rem, 2vw, 1.24rem);
+    margin-bottom: 30px;
+    color: #dceaff;
+}
+
+.hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.hero-badges span {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #04213a;
+    background: linear-gradient(145deg, #74deff, #12b8f4);
+    box-shadow: 0 14px 30px rgba(18, 184, 244, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(18, 184, 244, 0.4);
+}
+
+section {
+    padding: 76px 56px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 16px;
+    font-family: "Sora", sans-serif;
+    font-size: clamp(1.7rem, 3vw, 2.25rem);
+    color: var(--brand);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--ink-soft);
+    margin: 0 auto 40px;
+    max-width: 760px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    animation: riseIn 0.8s ease both;
+}
+
+.service-card:nth-child(2) { animation-delay: 0.08s; }
+.service-card:nth-child(3) { animation-delay: 0.16s; }
+.service-card:nth-child(4) { animation-delay: 0.24s; }
+.service-card:nth-child(5) { animation-delay: 0.32s; }
+.service-card:nth-child(6) { animation-delay: 0.40s; }
+
+.service-card:hover {
+    transform: translateY(-6px);
+    border-color: #9fdffc;
+}
+
+.service-card h3 {
+    color: var(--brand);
+    margin-bottom: 8px;
+    font-family: "Sora", sans-serif;
+}
+
+.about {
+    background: linear-gradient(180deg, var(--surface), var(--surface-soft));
+}
+
+.about-copy {
+    max-width: 920px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--ink-soft);
+}
+
+.stats {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px;
+}
+
+.stat {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+}
+
+.stat strong {
+    display: block;
+    font-family: "Sora", sans-serif;
+    color: var(--brand);
+    font-size: 1.35rem;
+}
+
+.family,
+.construction {
+    background: transparent;
+}
+
+.two-col {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 22px;
+}
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 24px;
+}
+
+.panel h3 {
+    margin-bottom: 10px;
+    font-family: "Sora", sans-serif;
+    color: var(--brand);
+}
+
+.panel p {
+    color: var(--ink-soft);
+}
+
+.focus-grid {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+.focus-item {
+    background: #f3f8ff;
+    border: 1px solid #d5e5f5;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-weight: 500;
+    color: #183b6d;
+    text-align: center;
+}
+
+.contact {
+    background: transparent;
+}
+
+form {
+    max-width: 560px;
+    margin: auto;
+    background: var(--surface);
+    padding: 28px;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border-radius: 10px;
+    border: 1px solid #c8d7e7;
+    font-size: 15px;
+    font-family: "Barlow", sans-serif;
+    background: #fcfeff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3bbcf0;
+    box-shadow: 0 0 0 4px rgba(59, 188, 240, 0.18);
+}
+
+.book-visit-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(140deg, #0f2e63, #1553a8);
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.book-visit-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.95;
+}
+
+footer {
+    background: #081d3d;
+    color: #d7e5ff;
+    text-align: center;
+    padding: 24px 20px;
+    margin-top: 36px;
+    font-size: 0.95rem;
+}
+
+@keyframes riseIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 980px) {
+    .two-col {
+        grid-template-columns: 1fr;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    header,
+    section {
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .hero {
+        min-height: 82vh;
+    }
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+<header>
+    <div class="logo-container">
+        <div class="logo-placeholder">PP</div>
+        <div class="company-name">Patel Prime Infra &amp; Security</div>
+    </div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#construction">Construction</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<div class="hero" id="home">
+    <div>
+        <h2>30+ Years of Electrical Expertise, Now Expanded Into Smart Security and Construction</h2>
+        <p>From trusted electrician services to advanced protection systems, we now deliver complete project execution with next-generation technology.</p>
+        <div class="hero-badges">
+            <span>30+ Years Electrical Experience</span>
+            <span>Family-Led Business</span>
+            <span>Security + Construction Integration</span>
+        </div>
+        <a href="#contact" class="btn">Book Consultation</a>
+    </div>
+</div>
+
+<section id="services">
+    <h2 class="section-title">Our Expanded Services</h2>
+    <p class="section-subtitle">Built on decades of electrician fieldwork and now powered by digital engineering and construction planning.</p>
+
+    <div class="services">
+        <div class="service-card">
+            <h3>Electrical Contracting</h3>
+            <p>Complete wiring, panel upgrades, fault diagnosis, and preventive electrical maintenance.</p>
+        </div>
+        <div class="service-card">
+            <h3>CCTV Installation</h3>
+            <p>High-definition surveillance systems for homes, offices, and industrial campuses.</p>
+        </div>
+        <div class="service-card">
+            <h3>Biometric Locks</h3>
+            <p>Fingerprint and retina-based access control for stronger entry security and traceability.</p>
+        </div>
+        <div class="service-card">
+            <h3>Access Control Systems</h3>
+            <p>Smart identity and visitor management tailored for businesses and gated communities.</p>
+        </div>
+        <div class="service-card">
+            <h3>Smart Automation</h3>
+            <p>Integrated automation for lighting, gates, sensors, and remote monitoring dashboards.</p>
+        </div>
+        <div class="service-card">
+            <h3>Construction Electrical Planning</h3>
+            <p>Electrical design and execution support for new construction and renovation projects.</p>
+        </div>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <h2 class="section-title">Our Story</h2>
+    <p class="about-copy">
+        I started as an electrician and built this business through 30+ years of hands-on project experience, client trust, and practical problem solving.
+        Today, we are expanding into a full-service model by bringing my son, a computer engineer, into the company.
+        This allows us to combine reliable electrical execution with modern software-driven security and intelligent systems.
+    </p>
+
+    <div class="stats">
+        <div class="stat"><strong>30+ Years</strong>Electrical Field Experience</div>
+        <div class="stat"><strong>2 Generations</strong>Family Business Leadership</div>
+        <div class="stat"><strong>Security + Tech</strong>Integrated Solutions</div>
+        <div class="stat"><strong>Construction Ready</strong>Execution Capability</div>
+    </div>
+</section>
+
+<section class="family" id="family">
+    <h2 class="section-title">Family Leadership Model</h2>
+    <p class="section-subtitle">A practical partnership between field-tested execution and modern engineering systems.</p>
+
+    <div class="two-col">
+        <div class="panel">
+            <h3>Founder: Master Electrician</h3>
+            <p>
+                Leading site execution, electrical quality standards, safety compliance, and client delivery based on decades of proven work.
+            </p>
+        </div>
+        <div class="panel">
+            <h3>Next Generation: Computer Engineer</h3>
+            <p>
+                Driving digital systems, smart integrations, automation logic, and future-ready infrastructure for every project.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="construction" id="construction">
+    <h2 class="section-title">Construction Line Expansion</h2>
+    <p class="section-subtitle">
+        We are actively taking on construction-related work with a focus on electrical infrastructure, security integration, and technical supervision from planning to handover.
+    </p>
+
+    <div class="panel" style="max-width: 1100px; margin: 0 auto;">
+        <h3>What We Are Taking Over</h3>
+        <div class="focus-grid">
+            <div class="focus-item">Residential Construction Projects</div>
+            <div class="focus-item">Commercial Build-outs</div>
+            <div class="focus-item">Electrical + Security Infrastructure</div>
+            <div class="focus-item">Site Power and Control Rooms</div>
+            <div class="focus-item">Renovation and Upgrade Works</div>
+            <div class="focus-item">End-to-End Technical Coordination</div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <p class="section-subtitle">Tell us your requirement and we will schedule a technical consultation for security, electrical, or construction scope.</p>
+
+    <form id="consultationForm">
+        <input type="text" name="full_name" placeholder="Full Name" required />
+        <input type="text" name="phone" placeholder="Phone Number" required />
+
+        <select name="service_required" required>
+            <option value="">Select Service</option>
+            <option value="Electrical Contracting">Electrical Contracting</option>
+            <option value="CCTV Installation">CCTV Installation</option>
+            <option value="Biometric Locks">Biometric Locks</option>
+            <option value="Access Control">Access Control</option>
+            <option value="Smart Automation">Smart Automation</option>
+            <option value="Construction Project">Construction Project</option>
+        </select>
+
+        <button type="submit" class="book-visit-btn">Book Consultation</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2026 Patel Prime Infra &amp; Security | Electrical, Security and Construction Solutions</p>
+</footer>
+
+<script>
+document.getElementById("consultationForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const data = {
+    full_name: this.full_name.value.trim(),
+    phone: this.phone.value.trim(),
+    service_required: this.service_required.value
+  };
+
+  const API_BASE_URL = "http://localhost:5000";
+
+  const res = await fetch(`${API_BASE_URL}/save`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    alert(result.message || "Failed to save");
+    return;
+  }
+
+  alert(result.message);
+  this.reset();
+});
+</script>
+</body>
+</html>
+
+
+
